@@ -10,6 +10,7 @@ class Post extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    protected $with=['category','author'];
 
 //     public static function alj()
 // {
@@ -36,9 +37,9 @@ public static function find($slug)
     {
         return $this->belongsTo(Category::class);
     }
-    public function user()
+    public function author()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id');
     }
 
 }
