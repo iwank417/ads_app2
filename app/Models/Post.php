@@ -12,10 +12,24 @@ class Post extends Model
     protected $guarded = ['id'];
     protected $with=['category','author'];
 
-//     public static function alj()
-// {
-//     return collect ( self::$blog_post );
-// }
+public function scopeSurya($query, array $filters)
+{
+    
+    $query->when($filters['cari'] ?? false , function ($query , $search ){
+       return $query->where('title','like','%'.$search.'%')
+        ->orWhere('body', 'like','%'. $search .'%');               
+    });
+    $query->when($filters['category'] ?? false , function($query,$category){
+        return $query->whereHas('category' , function($query)use ($category){
+            $query->where('slug' , $category);
+        });
+    });
+    $query->when($filters['author'] ?? false , function($query,$author){
+        return $query->whereHas('author' , function($query)use ($author){
+            $query->where('username' , $author);
+        });
+    });
+}
 
 public static function find($slug)
  {
@@ -39,7 +53,7 @@ public static function find($slug)
     }
     public function author()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class ,'user_id');
     }
 
 }
