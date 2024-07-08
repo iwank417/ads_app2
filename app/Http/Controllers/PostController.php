@@ -37,14 +37,22 @@ class PostController extends Controller
             "posts" => Post::latest()->surya(request(['cari' , 'category','author']))->paginate(7)->WithQueryString()
         ]);
     }
+
     public function show(Post $post){
         return View('post',[
             "title" => "Single_post",
             "active" => 'blog',
             "post" => $post
         ]);
-
     }
+    // public function firstpage(Post $post){
+    //     return View('index',[
+    //         "title" => "Single_post",
+    //         "active" => 'blog',
+    //         "post" => $post
+    //     ]);
+
+    // }
 
     /**
      * Show the form for creating a new resource.

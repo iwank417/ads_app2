@@ -32,7 +32,7 @@
     </a> {{ $posts[0]->created_at->DiffForHumans() }}</p>
     <h5>{{ $posts[0]["authors"] }}</h5>
 </small></p>
-      <p class="card-text">{{ $posts[0]->excerpt }}</p>
+      <p class="card-text">{{ $posts[0]->excerpt }}</p> 
       <a href="\post\{{ $posts[0]["slug"] }}" class="text-decoration-none btn btn-primary">Read more..</a>
     </div>
   </div>
